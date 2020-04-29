@@ -1,9 +1,8 @@
-
-from django.urls import path
-from django.shortcuts import render
-from . import views
+from django.contrib import admin
+from django.urls import path, include
+from .views import *
 
 urlpatterns = [
-    path('', views.index),
-    path('a/', views.a)
+    path('', index, name='index'),
+    path('a/createNew/', A.as_view(), name='create')
 ]

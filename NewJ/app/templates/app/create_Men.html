@@ -1,0 +1,25 @@
+{% extends 'app/base_block.html' %}
+
+{% block content %}
+<form method="post" action="{% url 'create'%}" class="form-inline">
+  {% csrf_token %}
+    {% for l in f %}
+     <div class="form-group">
+       <label>{{ l.label }}</label>
+        {{ l }}
+      {% if l.errors %}
+        {% for err in l.errors %}
+          <div class=" alert-danger">
+            {{ err }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+   <button type="submit" class="btn btn-primary "  >Submit</button>
+</form>
+
+{% endblock %}
+
+
