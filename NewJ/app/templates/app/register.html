@@ -1,0 +1,31 @@
+{% extends 'app/base_block.html' %}
+{% block title %}
+    New
+{% endblock %}
+{% block content %}
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <div class="col-10">
+
+        {% for i in form %}
+        <div class="form-group row">
+            <label class="col-md-2 col-form-label">{{i.label}}</label>
+            <div class="col-md-10">
+                {{ i }}
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if form.errors %}
+                <div class="alert alert-danger">
+                    {{ form.errors }}
+                </div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сздать</button>
+
+
+</form>
+
+{% endblock %}
