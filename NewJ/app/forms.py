@@ -5,14 +5,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.exceptions import ValidationError
 
-class MenForm(ModelForm):
 
+class MenForm(ModelForm):
     class Meta:
         model = Man
         fields = ['name', 'email']
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form-control mx-sm-3'}),
-            'email': forms.TextInput(attrs={'class':'form-control mx-sm-3'})
+            'name': forms.TextInput(attrs={'class': 'form-control mx-sm-3'}),
+            'email': forms.TextInput(attrs={'class': 'form-control mx-sm-3'})
 
         }
 
@@ -22,17 +22,19 @@ class MenForm(ModelForm):
             raise ValidationError('Нельзя вводить {}!!'.format(name))
         return name
 
+
 class LoginFornm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email']
 
+
 class RegisrerForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", 'email']
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for f in self.fields:
-            self.fields[f].widget.attrs['class']='form-control'
-
+            self.fields[f].widget.attrs['class'] = 'form-control'

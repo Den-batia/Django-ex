@@ -3,29 +3,24 @@ from .models import Man
 from .forms import *
 from django.http import HttpResponse, HttpRequest
 from django.views.generic import CreateView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 
 from django.views.generic import View
 
+
 # Create your views here.
-class Login(View):
-    def get(self, request):
-        l = LoginFornm()
-        return render(request, 'app/login.html', context={'l': l})
-    def post(self, reqest):
-        l = LoginFornm(reqest.POST)
-
-        if l.is_valid():
-            # print(f.save())
-            return HttpResponse('учетная запись создана')
-        else:
-            return render(reqest, 'app/login.html', context={'l': l})
+class Login(LoginView):
+    success_url = reverse_lazy('index')
+    template_name = 'app/login.html'
+    def get_success_url(self):
+        return self.success_url
 
 
-def index(request):
-    print('11111')
-    # a = Man.ob
-    return HttpResponse('ddddddddddd')
+class App_Index(CreateView):
+    template_name = 'app/index.html'
+    form_class = RegisrerForm
+
 
 class A(View):
     def get(self, request):
@@ -35,15 +30,23 @@ class A(View):
 
     def post(self, request):
         f = MenForm(request.POST)
-        print(f.errors)
         if f.is_valid():
             print(f.save())
             return HttpResponse('учетная запись создана')
         else:
             return render(request, 'app/create_Men.html', context={'f': f})
 
+
 class Register(CreateView):
     model = User
     template_name = 'app/register.html'
     form_class = RegisrerForm
-    success_url= reverse_lazy('create')
+    success_url = reverse_lazy('create')
+
+class LogOut(LogoutView):
+    success_url = reverse_lazy('index')
+    template_name = 'app/logout.html'
+    def get_success_url(self):
+        return self.success_url
+
+

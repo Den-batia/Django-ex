@@ -5,7 +5,7 @@
 {% block content %}
 <form action="{% url 'register' %}" method="post">
     {% csrf_token %}
-    <div class="col-10">
+    <div class="col-8">
 
         {% for i in form %}
         <div class="form-group row">
@@ -21,9 +21,9 @@
                     {{ form.errors }}
                 </div>
         {% endif %}
+        <button type="submit" class="btn btn-primary">Сздать</button>
     </div>
 
-    <button type="submit" class="btn btn-primary">Сздать</button>
 
 
 </form>

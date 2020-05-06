@@ -1,0 +1,10 @@
+{% extends 'app/base_block.html' %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+    да
+<a class="btn btn-primary" href="{% url 'logout' %}">Выйти</a>
+    {{request.user}}
+
+{% endif %}
+{% endblock %}
