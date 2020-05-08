@@ -2,9 +2,38 @@
 
 {% block content %}
 {% if request.user.is_authenticated %}
-    да
-<a class="btn btn-primary" href="{% url 'logout' %}">Выйти</a>
+    <a class="btn btn-primary" href="{% url 'logout' %}">Выйти</a>
     {{request.user}}
+    {% else %}
+        <a class="btn btn-primary" href="{% url 'register' %}">Регистрация</a>
+        <a class="btn btn-primary" href="{% url 'login' %}">Войти</a>
 
 {% endif %}
+
+<div class="col-8">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">name</th>
+          <th scope="col">email</th>
+          <th scope="col">Slug</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for man in obj %}
+        <tr>
+          <th scope="row">{{ man.id }}</th>
+          <td>{{ man.name }}</td>
+          <td>{{ man.email }}</td>
+          <td>{{ man.slug }}</td>
+          {% if request.user.is_authenticated %}
+                <td> <a class="btn btn-primary" href="{% url 'detail' man.slug %}">Редактировать</a></td>
+                <td> <a class="btn btn-danger" href="{% url 'logout' %}">Удалить</a></td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+</table>
+</div>
 {% endblock %}
