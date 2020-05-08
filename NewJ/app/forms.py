@@ -11,8 +11,8 @@ class MenForm(ModelForm):
         model = Man
         fields = ['name', 'email']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control mx-sm-3'}),
-            'email': forms.TextInput(attrs={'class': 'form-control mx-sm-3'})
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.TextInput(attrs={'class': 'form-control'})
 
         }
 
