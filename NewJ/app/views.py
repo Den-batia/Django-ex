@@ -1,3 +1,4 @@
+from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
 from .models import Man
 from .forms import *
@@ -21,10 +22,7 @@ class App_Index(CreateView):
     form_class = MenForm
     model = Man
     template_name = 'app/index.html'
-
-    def get(self, request, *args, **kwargs):
-        print(super().get(request, *args, **kwargs))
-        return super().get(request, *args, **kwargs)
+    success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):
         obj = self.model.objects.all()
@@ -32,19 +30,21 @@ class App_Index(CreateView):
         return super().get_context_data(**kwargs)
 
 
+#
+# class A(CreateView):
+#     # model = Man
+#
+#     form_class = MenForm
+#     success_url = reverse_lazy('index')
+#     template_name = 'app/create_Men.html'
 
-class A(CreateView):
-    # model = Man
-
-    form_class = MenForm
-    template_name = 'app/create_Men.html'
 
 
 class Register(CreateView):
     # model = User
     template_name = 'app/register.html'
     form_class = RegisrerForm
-    success_url = reverse_lazy('create')
+    success_url = reverse_lazy('index')
 
 class LogOut(LogoutView):
     next_page = reverse_lazy('login')
@@ -59,9 +59,13 @@ class C(UpdateView):
     template_name = 'app/detail.html'
     form_class = MenForm
 
-    def get_context_data(self, **kwargs):
-        print(super().get_context_data(**kwargs))
-        return super().get_context_data(**kwargs)
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if str(request.user) == self.object.name:
+            return super().get(request, *args, **kwargs)
+        else:
+            raise Http404('Вы не имеете права к указанному посту!!!')
 
 
 

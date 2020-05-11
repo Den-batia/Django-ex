@@ -9,10 +9,11 @@ from django.core.exceptions import ValidationError
 class MenForm(ModelForm):
     class Meta:
         model = Man
-        fields = ['name', 'email']
+        fields = ['name', 'email', 'slug']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.TextInput(attrs={'class': 'form-control'})
+            'email': forms.TextInput(attrs={'class': 'form-control'}),
+            'slug': forms.TextInput(attrs={'class': 'form-control'}),
 
         }
 
@@ -32,7 +33,7 @@ class LoginFornm(ModelForm):
 class RegisrerForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ["username", 'email']
+        fields = ["username", 'email',]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
