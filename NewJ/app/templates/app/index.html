@@ -62,7 +62,7 @@
           <td>{{ man.email }}</td>
           <td>{{ man.slug }}</td>
           {% if request.user.is_authenticated %}
-                <td> <a class="btn btn-primary" href="{% url 'detail' man.slug %}">Редактировать</a></td>
+                <td> <a class="btn btn-primary" href="{{ man.get_absolute_url }}">Редактировать</a></td>
                 <td> <a class="btn btn-danger" href="{% url 'logout' %}">Удалить</a></td>
           {% endif %}
         </tr>
@@ -70,5 +70,6 @@
       </tbody>
 </table>
 </div>
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12445.949933181753!2d28.50394491018388!3d54.2512058026196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sby!4v1589480365336!5m2!1sru!2sby" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">Карта</iframe>
 <!-- <a class="disabled" href="{% url 'index' %}" >Disabled link</a>-->
 {% endblock %}

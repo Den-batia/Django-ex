@@ -1,7 +1,7 @@
 {% extends 'app/base_block.html' %}
 {% block content %}
 
-<form action="{% url 'detail' slug=object %}" method="post" id="form_detail">
+    <form action="{% url 'authenticate' pk=object.id %}" method="post" id="form_detail">
               {% csrf_token %}
               {{ form }}
                 {% if form.errors %}
@@ -10,8 +10,5 @@
                     </div>
                 {% endif %}
 
-</form>
-    <div class="modal-footer">
-            <button form="form_detail" type="submit" class="btn btn-primary">Обновить</button>
-          </div>
+    </form>
 {% endblock %}
