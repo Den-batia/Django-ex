@@ -1,20 +1,17 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Man, AuthCode
+from .models import News, AuthCode
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.exceptions import ValidationError
 
 
-class MenForm(ModelForm):
+class NewsForm(ModelForm):
     class Meta:
-        model = Man
-        fields = ['name', 'text', 'slug']
+        model = News
+        fields = ['text', 'author']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.TextInput(attrs={'class': 'form-control'}),
-            'slug': forms.TextInput(attrs={'class': 'form-control'}),
-
+            'text': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
     def clean_name(self):

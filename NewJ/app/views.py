@@ -1,6 +1,6 @@
 from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
-from .models import Man
+from .models import News
 from .forms import *
 from django.http import HttpResponse, HttpRequest
 from django.views.generic import CreateView, FormView, UpdateView, DetailView
@@ -37,8 +37,8 @@ class Login(LoginView):
 
 
 class App_Index(CreateView):
-    form_class = MenForm
-    model = Man
+    form_class = NewsForm
+    model = News
     template_name = 'app/index.html'
     success_url = reverse_lazy('index')
 
@@ -46,6 +46,9 @@ class App_Index(CreateView):
         obj = self.model.objects.all()
         kwargs['obj'] = obj
         return super().get_context_data(**kwargs)
+
+
+
 
 
 class Register(CreateView):
@@ -73,6 +76,14 @@ class Register(CreateView):
         if hasattr(self, 'object'):
             kwargs.update({'instance': self.object})
         return kwargs
+
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        obj = form.save(commit=False)
+        obj.is_active = False
+        obj.save()
+        form.save_m2m()
+        return super().form_valid(form)
 
 
 class My_Auth(View):
@@ -111,15 +122,10 @@ class LogOut(LogoutView):
     template_name = 'app/index.html'
 
 
-class B(FormView):
-    form_class = MenForm
-    template_name = 'app/b.html'
-
-
 class C(UpdateView):
-    model = Man
+    model = News
     template_name = 'app/detail.html'
-    form_class = MenForm
+    form_class = NewsForm
     success_url = reverse_lazy('index')
 
     def get(self, request, *args, **kwargs):

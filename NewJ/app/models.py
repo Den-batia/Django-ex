@@ -9,28 +9,27 @@ def new_slug(s):
     new_s = slugify(s, allow_unicode=True)
     return new_s + '-' + str(int(time.time()))
 
-class Man(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=250)
-    text = models.TextField(max_length=200, default='None')
-    slug = models.SlugField(max_length=50, default=None, blank=True, unique=True)
+class News(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField('Содержание', max_length=500)
+    slug = models.SlugField(max_length=50, unique=True)
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'slug': self.slug})
 
 
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
+    def save(self, *args, **kwargs):
+        print(args, kwargs)
         if not self.id:
             self.slug = new_slug(self.text)
-        super().save(force_insert=False, force_update=False, using=None, update_fields=None)
+        # super().save(*args, **kwargs)
 
     def __str__(self):
         return self.slug
 
 class AuthCode(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pk')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     auth_code = models.IntegerField()
 
     def __str__(self):

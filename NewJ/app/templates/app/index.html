@@ -26,6 +26,7 @@
           <div class="modal-body">
             <form action="{% url 'index' %}" method="post" id="form_add">
               {% csrf_token %}
+
               {{ form }}
 
                 {% if form.errors %}
@@ -49,8 +50,7 @@
       <thead>
         <tr>
           <th scope="col">id</th>
-          <th scope="col">name</th>
-          <th scope="col">email</th>
+          <th scope="col">author</th>
           <th scope="col">Slug</th>
         </tr>
       </thead>
@@ -58,8 +58,7 @@
         {% for man in obj %}
         <tr>
           <th scope="row">{{ man.id }}</th>
-          <td>{{ man.name }}</td>
-          <td>{{ man.email }}</td>
+          <td>{{ man.author }}</td>
           <td>{{ man.slug }}</td>
           {% if request.user.is_authenticated %}
                 <td> <a class="btn btn-primary" href="{{ man.get_absolute_url }}">Редактировать</a></td>
