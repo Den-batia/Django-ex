@@ -63,7 +63,7 @@ ROOT_URLCONF = 'NewJ.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'forms')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -142,6 +142,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR, 'static')
 ]
+
+ACCOUNT_FORMS = {
+    'signup': 'forms.forms.MyCustomSignupForm'
+}
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
