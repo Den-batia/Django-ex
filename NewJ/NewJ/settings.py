@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -139,8 +140,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS =[
-    os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
 ]
 
 ACCOUNT_FORMS = {
@@ -154,3 +155,14 @@ EMAIL_HOST_USER = 'denis.batia004@gmail.com'
 EMAIL_HOST_PASSWORD = '^Osadki5682081'
 DEFAULT_FROM_EMAIL = 'denis.batia004@gmail.com'
 DEFAULT_TO_EMAIL = 'to email'
+
+RECAPTCHA_PUBLIC_KEY = '6LcCR_oUAAAAACtbxLEn_fqExYzex0CH0Xlv1r1M'
+RECAPTCHA_PRIVATE_KEY = '6LcCR_oUAAAAAGNTeziaFAj9KsiwNuzCt_JBLmSF'
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout':3600}
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+CELERY_TASK_SERIALIZER ='json'
+CELERY_ACCEPT_CONTENT = ['application/json']  # Ignore other content
+CELERY_RESULT_SERIALIZER ='json'
+

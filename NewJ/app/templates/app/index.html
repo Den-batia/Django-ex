@@ -5,8 +5,8 @@
     <a class="btn btn-primary" href="{% url 'logout' %}">Выйти</a>
     {{request.user}}
     {% else %}
-        <a class="btn btn-primary" href="{% url 'register' %}">Регистрация</a>
-        <a class="btn btn-primary" href="{% url 'login' %}">Войти</a>
+        <a class="btn btn-primary" href="{% url 'account_signup' %}">Регистрация</a>
+        <a class="btn btn-primary" href="{% url 'account_login' %}">Войти</a>
 
 {% endif %}
 
@@ -69,6 +69,7 @@
       </tbody>
 </table>
 </div>
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12445.949933181753!2d28.50394491018388!3d54.2512058026196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sby!4v1589480365336!5m2!1sru!2sby" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">Карта</iframe>
+<iframe src="https://www.google.com/maps/d/embed?mid=1v1qG5ha46gw77FuSTpbiKuSK6LgKndHA" width="940" height="480"></iframe>
 <!-- <a class="disabled" href="{% url 'index' %}" >Disabled link</a>-->
+<button id="asd" onmouseover="ItR('asd')" onmouseout="ItW('asd')">ASD</button>
 {% endblock %}

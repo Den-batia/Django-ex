@@ -19,6 +19,7 @@ from app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    # path('captcha/', include('captcha.urls')),
     path('', views.App_Index.as_view(), name='index'),
     path('a/', include('app.urls')),
     path('login/', views.Login.as_view(), name='login'),

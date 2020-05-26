@@ -2,6 +2,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
 from .models import News
 from .forms import *
+from . import tasks
 from django.http import HttpResponse, HttpRequest
 from django.views.generic import CreateView, FormView, UpdateView, DetailView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -44,6 +45,7 @@ class App_Index(CreateView):
 
     def get_context_data(self, **kwargs):
         obj = self.model.objects.all()
+        tasks.asd.delay(10)
         kwargs['obj'] = obj
         return super().get_context_data(**kwargs)
 
