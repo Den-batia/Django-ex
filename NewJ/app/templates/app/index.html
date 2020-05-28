@@ -1,5 +1,6 @@
 {% extends 'app/base_block.html' %}
-
+{% load filters %}
+{% load tags %}
 {% block content %}
 {% if request.user.is_authenticated %}
     <a class="btn btn-primary" href="{% url 'logout' %}">Выйти</a>
@@ -69,6 +70,8 @@
       </tbody>
 </table>
 </div>
+<p2>{{ 1|add }}</p2>
+<p2>{% qwe %}</p2>
 <iframe src="https://www.google.com/maps/d/embed?mid=1v1qG5ha46gw77FuSTpbiKuSK6LgKndHA" width="940" height="480"></iframe>
 <!-- <a class="disabled" href="{% url 'index' %}" >Disabled link</a>-->
 <button id="asd" onmouseover="ItR('asd')" onmouseout="ItW('asd')">ASD</button>
