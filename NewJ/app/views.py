@@ -8,7 +8,7 @@ from django.views.generic import CreateView, FormView, UpdateView, DetailView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.views.generic import View
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 
 
 # Create your views here.
@@ -45,7 +45,7 @@ class App_Index(CreateView):
 
     def get_context_data(self, **kwargs):
         obj = self.model.objects.all()
-        tasks.asd.delay(10)
+        a = tasks.asd.delay(10)
         kwargs['obj'] = obj
         return super().get_context_data(**kwargs)
 
@@ -85,7 +85,7 @@ class Register(CreateView):
         obj.is_active = False
         obj.save()
         form.save_m2m()
-        return super().form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class My_Auth(View):
