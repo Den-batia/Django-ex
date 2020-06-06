@@ -9,6 +9,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.views.generic import View
 from django.http import Http404, HttpResponseRedirect
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -44,6 +45,9 @@ class App_Index(CreateView):
     success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):
+        a = My_User.objects.all()
+        for d in a:
+            print(d.get_absolute_url())
         obj = self.model.objects.all()
         # a = tasks.asd.delay(10)
         kwargs['obj'] = obj
@@ -81,8 +85,38 @@ class Register(CreateView):
         self.object.is_active = False
         self.object.save()
         form.save_m2m()
+        link = self.request.build_absolute_uri(self.object.get_absolute_url())
+        send_mail(
+            'Subject here',
+            link,
+            'denis.batia004@gmail.com',
+            ['denis.batia004@yandex.ru'],
+            fail_silently=False,
+        )
         return HttpResponseRedirect(self.get_success_url())
 
+class Confirm_Registration(DetailView):
+    queryset = My_User.objects.all()
+    template_name = 'app/index.html'
+
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        print(self.object)
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
+
+    def get_object(self, queryset=None):
+
+        uuid = self.kwargs.get('uuid')
+        queryset = self.queryset.filter(uuid=uuid)
+        try:
+            # Get the single item from the filtered queryset
+            obj = queryset.get()
+        except queryset.model.DoesNotExist:
+            raise Http404(_("No %(verbose_name)s found matching the query") %
+                          {'verbose_name': queryset.model._meta.verbose_name})
+        return obj
 
 
 class My_Auth(View):

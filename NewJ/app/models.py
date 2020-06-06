@@ -4,6 +4,8 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 import time
 import uuid
+from django.urls import reverse
+from django.http import HttpRequest
 
 # Create your models here.
 def new_slug(s):
@@ -40,10 +42,8 @@ class AuthCode(models.Model):
 class My_User(User):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
 
-
-    def save(self, *args, **kwargs):
-        print(self.uuid)
-        super().save(*args, **kwargs)
+    def get_absolute_url(self):
+        return reverse('confirm_registration', kwargs={'pk': self.uuid})
 
 
 
