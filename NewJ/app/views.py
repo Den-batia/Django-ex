@@ -1,6 +1,6 @@
 from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
-from .models import News
+from .models import News, My_User
 from .forms import *
 from . import tasks
 from django.http import HttpResponse, HttpRequest
@@ -45,16 +45,12 @@ class App_Index(CreateView):
 
     def get_context_data(self, **kwargs):
         obj = self.model.objects.all()
-        a = tasks.asd.delay(10)
+        # a = tasks.asd.delay(10)
         kwargs['obj'] = obj
         return super().get_context_data(**kwargs)
 
-
-
-
-
 class Register(CreateView):
-    # model = User
+    model = My_User
     template_name = 'app/register.html'
     form_class = RegisrerForm
     success_url = reverse_lazy('index')
@@ -81,11 +77,12 @@ class Register(CreateView):
 
     def form_valid(self, form):
         """If the form is valid, save the associated model."""
-        obj = form.save(commit=False)
-        obj.is_active = False
-        obj.save()
+        self.object = form.save(commit=False)
+        self.object.is_active = False
+        self.object.save()
         form.save_m2m()
         return HttpResponseRedirect(self.get_success_url())
+
 
 
 class My_Auth(View):
@@ -93,6 +90,7 @@ class My_Auth(View):
     model = AuthCode
     form_class = AuthForm
     template_name = 'app/authenticate.html'
+
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
         queryset = None

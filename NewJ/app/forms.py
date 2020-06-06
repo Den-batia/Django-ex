@@ -1,9 +1,10 @@
 from django.forms import ModelForm
 from django import forms
-from .models import News, AuthCode
+from .models import News, AuthCode, My_User
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.exceptions import ValidationError
+from captcha.fields import ReCaptchaField
 
 
 class NewsForm(ModelForm):
@@ -32,8 +33,10 @@ class LoginFornm(ModelForm):
 
 
 class RegisrerForm(UserCreationForm):
+    captcha = ReCaptchaField()
+
     class Meta:
-        model = User
+        model = My_User
         fields = ["username", 'email']
 
     def __init__(self, *args, **kwargs):

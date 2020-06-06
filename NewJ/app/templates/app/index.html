@@ -6,7 +6,7 @@
     <a class="btn btn-primary" href="{% url 'logout' %}">Выйти</a>
     {{request.user}}
     {% else %}
-        <a class="btn btn-primary" href="{% url 'account_signup' %}">Регистрация</a>
+        <a class="btn btn-primary" href="{% url 'register' %}">Регистрация</a>
         <a class="btn btn-primary" href="{% url 'account_login' %}">Войти</a>
 
 {% endif %}
