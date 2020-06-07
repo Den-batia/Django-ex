@@ -46,11 +46,12 @@ class App_Index(CreateView):
 
     def get_context_data(self, **kwargs):
         a = My_User.objects.all()
-        for d in a:
-            print(d.get_absolute_url())
+        for s in a:
+            print(s.uuid)
         obj = self.model.objects.all()
         # a = tasks.asd.delay(10)
         kwargs['obj'] = obj
+
         return super().get_context_data(**kwargs)
 
 class Register(CreateView):
@@ -81,6 +82,8 @@ class Register(CreateView):
 
     def form_valid(self, form):
         """If the form is valid, save the associated model."""
+        for a in form.fields:
+            print(dir(form.fields[a]))
         self.object = form.save(commit=False)
         self.object.is_active = False
         self.object.save()
@@ -97,12 +100,11 @@ class Register(CreateView):
 
 class Confirm_Registration(DetailView):
     queryset = My_User.objects.all()
-    template_name = 'app/index.html'
+    template_name = 'app/b.html'
 
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        print(self.object)
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
 

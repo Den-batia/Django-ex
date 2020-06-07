@@ -6,25 +6,28 @@
 <div class="col-5">
   <form class="signup" id="signup_form" method="post" action="{% url 'register' %}">
     {% csrf_token %}
-    <div class="col-xs-12 col-sm-12 col-md-12">
+    <div style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-md-12">
       {{ form.non_field_errors }}
       {% if form.username.errors %}
-        <div class="alert alert-danger">{{ form.username.errors }}</div>
+      <div class="alert alert-danger">{{ form.username.errors }}</div>
       {% endif %}
       {{ form.username.label }} <sup class="text-danger">*</sup>
-      <div style="margin-bottom: 25px" class="input-group">
+      <div class="input-group">
         {{ form.username }}
       </div>
+      <small class="form-text  text-primary">{{ form.username.help_text }}</small>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
+
+    <div style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-md-12">
       {% if form.email.errors %}
         <div class="alert alert-danger">{{ form.email.errors }}</div>
       {% endif %}
       {{ form.email.label }} <sup class="text-danger">*</sup>
-      <div style="margin-bottom: 25px" class="input-group">
+      <div class="input-group">
         {{ form.email }}
       </div>
+      <small class="form-text  text-primary">{{ form.email.help_text }}</small>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -32,27 +35,29 @@
         <div class="alert alert-danger">{{ form.password1.errors }}</div>
       {% endif %}
       {{ form.password1.label }} <sup class="text-danger">*</sup>
-      <div style="margin-bottom: 25px" class="input-group">
+      <div class="input-group">
         {{ form.password1 }}
       </div>
+      <small class="form-text  text-primary">{{ form.password1.help_text }}</small>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
+    <div style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-md-12">
       {% if form.password2.errors %}
         <div class="alert alert-danger">{{ form.password2.errors }}</div>
       {% endif %}
       {{ form.password2.label }} <sup class="text-danger">*</sup>
-      <div style="margin-bottom: 25px" class="input-group">
+      <div class="input-group">
         {{ form.password2 }}
       </div>
+      <small class="form-text  text-primary">{{ form.password2.help_text }}</small>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
+    <div style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-md-12">
       {% if form.captcha.errors %}
         <div class="alert alert-danger">{{ form.captcha.errors }}</div>
       {% endif %}
       {{ form.captcha.label }} <sup class="text-danger">*</sup>
-      <div style="margin-bottom: 25px" class="input-group">
+      <div class="input-group">
         {{ form.captcha }}
       </div>
     </div>
@@ -64,5 +69,6 @@
     <button type="submit" id="asd">Зарегистрироваться</button>
   </form>
 </div>
+
 
 {% endblock %}

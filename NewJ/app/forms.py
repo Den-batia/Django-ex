@@ -44,6 +44,7 @@ class RegisrerForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for f in self.fields:
             self.fields[f].widget.attrs['class'] = 'form-control'
+        self.fields['email'].help_text = 'Обязательное поле. Введите настоящий адрес электронной почты.'
 
 
 

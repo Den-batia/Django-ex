@@ -43,7 +43,7 @@ class My_User(User):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
 
     def get_absolute_url(self):
-        return reverse('confirm_registration', kwargs={'pk': self.uuid})
+        return reverse('confirm_registration', kwargs={'uuid': self.uuid})
 
 
 
