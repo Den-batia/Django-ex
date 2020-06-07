@@ -45,6 +45,11 @@ class RegisrerForm(UserCreationForm):
         for f in self.fields:
             self.fields[f].widget.attrs['class'] = 'form-control'
         self.fields['email'].help_text = 'Обязательное поле. Введите настоящий адрес электронной почты.'
-
+        self.fields['password1'].help_text = '<ul>' \
+                                             '<li>Ваш пароль не может быть слишком похож на другую вашу личную информацию</li>' \
+                                             '<li>Ваш пароль должен содержать как минимум 8 символов.</li>' \
+                                             '<li>Ваш пароль не может быть часто используемым паролем.</li>' \
+                                             '<li>Ваш пароль не должен состоять только из цифр.</li>' \
+                                             '</ul>'
 
 

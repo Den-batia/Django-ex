@@ -45,9 +45,6 @@ class App_Index(CreateView):
     success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):
-        a = My_User.objects.all()
-        for s in a:
-            print(s.uuid)
         obj = self.model.objects.all()
         # a = tasks.asd.delay(10)
         kwargs['obj'] = obj
@@ -59,6 +56,7 @@ class Register(CreateView):
     template_name = 'app/register.html'
     form_class = RegisrerForm
     success_url = reverse_lazy('index')
+
 
     def get_form_kwargs(self):
         """Return the keyword arguments for instantiating the form."""

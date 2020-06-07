@@ -38,7 +38,7 @@
       <div class="input-group">
         {{ form.password1 }}
       </div>
-      <small class="form-text  text-primary">{{ form.password1.help_text }}</small>
+      <small class="form-text  text-primary">{{ form.password1.help_text|safe }}</small>
     </div>
 
     <div style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-md-12">
