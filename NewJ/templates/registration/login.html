@@ -17,7 +17,8 @@
       </div>
       <small class="form-text  text-primary">{{ form.username.help_text }}</small>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
+
+    <div style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-md-12">
       {% if form.password.errors %}
         <div class="alert alert-danger">{{ form.password.errors }}</div>
       {% endif %}
@@ -27,11 +28,21 @@
       </div>
       <small class="form-text  text-primary">{{ form.password.help_text|safe }}</small>
     </div>
+
+        <div style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-md-12">
+            {% if form.captcha.errors %}
+            <div class="alert alert-danger">{{ form.captcha.errors }}</div>
+            {% endif %}
+            {{ form.captcha.label }} <sup class="text-danger">*</sup>
+            <div class="input-group">
+                {{ form.captcha }}
+            </div>
+    </div>
         {% if form.errors %}
             <div class=" alert alert-danger">{{ form.errors }}</div>
         {% endif %}
 
-       <button type="submit" class="btn btn-primary" >Войти</button>
+     <button type="submit" id="asd">Войти</button>
     </form>
 </div>
 {% endblock %}

@@ -29,6 +29,7 @@ class AuthForm(ModelForm):
 
 
 class LoginFornm(AuthenticationForm):
+    captcha = ReCaptchaField()
     class Meta:
         model = My_User
         fields = ['username', 'password']
@@ -37,6 +38,8 @@ class LoginFornm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         for f in self.fields:
             self.fields[f].widget.attrs['class'] = 'form-control'
+        self.fields['password'].help_text = 'ВВедите пароль.'
+        self.fields['username'].help_text = 'Введите свой логин.'
 
 
 class RegisrerForm(UserCreationForm):
