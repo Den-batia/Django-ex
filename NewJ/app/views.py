@@ -15,7 +15,8 @@ from django.core.mail import send_mail
 # Create your views here.
 class Login(LoginView):
     success_url = reverse_lazy('index')
-    template_name = 'app/login.html'
+    template_name = 'registration/login.html'
+    form_class = LoginFornm
 
     def get_success_url(self):
         return self.success_url
@@ -25,6 +26,7 @@ class Login(LoginView):
             'initial': self.get_initial(),
             'prefix': self.get_prefix(),
         }
+
         if self.request.method in ('POST', 'PUT'):
             data = self.request.POST.copy()
             if data.get('username'):
@@ -53,7 +55,7 @@ class App_Index(CreateView):
 
 class Register(CreateView):
     model = My_User
-    template_name = 'app/register.html'
+    template_name = 'registration/register.html'
     form_class = RegisrerForm
     success_url = reverse_lazy('index')
 

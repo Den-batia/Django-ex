@@ -7,7 +7,6 @@ from django.core.exceptions import ValidationError
 from captcha.fields import ReCaptchaField
 
 
-
 class NewsForm(ModelForm):
     class Meta:
         model = News
@@ -22,15 +21,22 @@ class NewsForm(ModelForm):
             raise ValidationError('Нельзя вводить {}!!'.format(name))
         return name
 
+
 class AuthForm(ModelForm):
     class Meta:
         model = AuthCode
         fields = ['auth_code']
 
-class LoginFornm(ModelForm):
+
+class LoginFornm(AuthenticationForm):
     class Meta:
-        model = User
-        fields = ['username', 'email']
+        model = My_User
+        fields = ['username', 'password']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for f in self.fields:
+            self.fields[f].widget.attrs['class'] = 'form-control'
 
 
 class RegisrerForm(UserCreationForm):
@@ -51,5 +57,3 @@ class RegisrerForm(UserCreationForm):
                                              '<li>Ваш пароль не может быть часто используемым паролем.</li>' \
                                              '<li>Ваш пароль не должен состоять только из цифр.</li>' \
                                              '</ul>'
-
-
