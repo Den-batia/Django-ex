@@ -10,7 +10,8 @@ from django.urls import reverse_lazy
 from django.views.generic import View
 from django.http import Http404, HttpResponseRedirect
 from django.core.mail import send_mail
-
+from rest_framework import viewsets
+from .serializers import UserSerializer
 
 # Create your views here.
 class Login(LoginView):
@@ -171,3 +172,9 @@ class C(UpdateView):
             return super().get(request, *args, **kwargs)
         else:
             raise Http404('Вы не имеете права к указанному посту!!!')
+
+
+class UserViewSet(viewsets.ModelViewSet):
+
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer

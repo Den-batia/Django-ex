@@ -1,6 +1,6 @@
 {% extends 'app/base_block.html' %}
 {% block title %}
-    New
+    Вход
 {% endblock %}
 {% block content %}
 <div class="col-5">
@@ -28,18 +28,18 @@
       </div>
       <small class="form-text  text-primary">{{ form.password.help_text|safe }}</small>
     </div>
-
         <div style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-md-12">
-            {% if form.captcha.errors %}
-            <div class="alert alert-danger">{{ form.captcha.errors }}</div>
-            {% endif %}
+<!--            {% if form.captcha.errors %}-->
+<!--            <div class="alert alert-danger">{{ form.captcha.errors }}</div>-->
+<!--            {% endif %}-->
             {{ form.captcha.label }} <sup class="text-danger">*</sup>
             <div class="input-group">
                 {{ form.captcha }}
             </div>
-    </div>
+        </div>
+        <div  style="margin-bottom: 25px" class="col-xs-12 col-sm-12 col-md-12"></div>
         {% if form.errors %}
-            <div class=" alert alert-danger">{{ form.errors }}</div>
+            <div class="alert alert-danger">{{ form.errors }}</div>
         {% endif %}
 
      <button type="submit" id="asd">Войти</button>

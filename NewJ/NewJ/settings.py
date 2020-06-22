@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'captcha',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +164,7 @@ CELERY_TASK_SERIALIZER ='json'
 CELERY_ACCEPT_CONTENT = ['application/json']  # Ignore other content
 CELERY_RESULT_SERIALIZER ='json'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
