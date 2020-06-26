@@ -11,7 +11,10 @@ from django.views.generic import View
 from django.http import Http404, HttpResponseRedirect
 from django.core.mail import send_mail
 from rest_framework import viewsets
-from .serializers import UserSerializer
+from .serializers import UserSerializer, NewsSerializer
+from rest_framework.decorators import api_view, throttle_classes
+from rest_framework.throttling import UserRateThrottle
+from rest_framework.response import Response
 
 # Create your views here.
 class Login(LoginView):
@@ -178,3 +181,14 @@ class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+
+
+class OncePerDayUserThrottle(UserRateThrottle):
+    rate = '1/sec'
+
+
+class NewsViewSet(viewsets.ModelViewSet):
+    throttle_classes = (OncePerDayUserThrottle,)
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
