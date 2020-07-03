@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
     news = serializers.PrimaryKeyRelatedField(many=True, queryset=News.objects.all())
     class Meta:
         model = User
-        fields = ['id', 'url', 'username', 'email', 'news', 'password']
+        fields = ['id', 'url', 'username', 'email', 'news']
 
 
 class UserSerializer1(serializers.ModelSerializer):

@@ -16,7 +16,8 @@ def new_slug(s):
 class News(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='news')
     text = models.TextField('Содержание', max_length=500)
-    slug = models.SlugField(max_length=50, unique=True, default=None)
+    slug = models.SlugField(max_length=50, unique=True, default='')
+    file = models.FileField()
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'slug': self.slug})

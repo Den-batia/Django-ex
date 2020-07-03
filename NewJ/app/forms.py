@@ -10,16 +10,10 @@ from captcha.fields import ReCaptchaField
 class NewsForm(ModelForm):
     class Meta:
         model = News
-        fields = ['text', 'author']
+        fields = ['text', 'author', 'file']
         widgets = {
             'text': forms.TextInput(attrs={'class': 'form-control'}),
         }
-
-    def clean_name(self):
-        name = self.cleaned_data.get('name')
-        if name == 'a':
-            raise ValidationError('Нельзя вводить {}!!'.format(name))
-        return name
 
 
 class AuthForm(ModelForm):
@@ -60,3 +54,16 @@ class RegisrerForm(UserCreationForm):
                                              '<li>Ваш пароль не может быть часто используемым паролем.</li>' \
                                              '<li>Ваш пароль не должен состоять только из цифр.</li>' \
                                              '</ul>'
+
+
+class GetFormToken(forms.Form):
+    refresh = forms.CharField(label='refresh', max_length=250)
+    access = forms.CharField(label='access', max_length=250)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for f in self.fields:
+            self.fields[f].widget.attrs['class'] = 'form-control'
+            self.fields[f].widget.attrs['readonly'] = ''
+
+

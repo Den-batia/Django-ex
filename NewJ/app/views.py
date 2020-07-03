@@ -10,11 +10,12 @@ from django.urls import reverse_lazy
 from django.views.generic import View
 from django.http import Http404, HttpResponseRedirect
 from django.core.mail import send_mail
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions, renderers
 from .serializers import UserSerializer, NewsSerializer
 from rest_framework.decorators import api_view, throttle_classes
 from rest_framework.throttling import UserRateThrottle
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your views here.
 class Login(LoginView):
@@ -53,9 +54,10 @@ class App_Index(CreateView):
     def get_context_data(self, **kwargs):
         obj = self.model.objects.all()
         # a = tasks.asd.delay(10)
-        kwargs['obj'] = obj
+        # kwargs['obj'] = obj
 
         return super().get_context_data(**kwargs)
+
 
 class Register(CreateView):
     model = My_User
@@ -177,6 +179,32 @@ class C(UpdateView):
             raise Http404('Вы не имеете права к указанному посту!!!')
 
 
+class MyGetToken(FormView):
+    template_name = 'app/get_token.html'
+    form_class = GetFormToken
+    success_url = reverse_lazy('login')
+
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_form_class()
+        form = form_class(self.get_form_kwargs())
+        return form
+
+    def get(self, request, *args, **kwargs):
+        if request.user.id:
+            return self.render_to_response(self.get_context_data())
+        else:
+            return HttpResponseRedirect(self.get_success_url())
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if self.request.user.id:
+            refresh = RefreshToken.for_user(self.request.user)
+            kwargs.update({'refresh': str(refresh), 'access': str(refresh.access_token)})
+            return kwargs
+
+
+
 class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all().order_by('-date_joined')
@@ -188,7 +216,11 @@ class OncePerDayUserThrottle(UserRateThrottle):
 
 
 class NewsViewSet(viewsets.ModelViewSet):
+
     throttle_classes = (OncePerDayUserThrottle,)
+    # renderer_classes = (renderers.JSONRenderer,)
     queryset = News.objects.all()
     serializer_class = NewsSerializer
+    # permission_classes = (permissions.IsAuthenticated,)
+
 

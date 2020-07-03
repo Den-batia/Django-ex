@@ -4,28 +4,14 @@
 {% block content %}
 {% if request.user.is_authenticated %}
     <a class="btn btn-primary" href="{% url 'logout' %}">Выйти</a>
+    <a class="btn btn-primary" href="{% url 'get_token' %}">API</a>
     {{request.user}}
     {% else %}
         <a class="btn btn-primary" href="{% url 'register' %}">Регистрация</a>
         <a class="btn btn-primary" href="{% url 'login' %}">Войти</a>
 
 {% endif %}
-
-<div class="col-8">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Создать Man</button>
-
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form action="{% url 'index' %}" method="post" id="form_add">
+            <form enctype="multipart/form-data" action="{% url 'index' %}" method="post" id="form_add">
               {% csrf_token %}
 
               {{ form }}
@@ -35,16 +21,9 @@
                         {{ form.errors }}
                     </div>
                 {% endif %}
+                <button type="submit">Создать</button>
 
             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
-            <button form="form_add" type="submit" class="btn btn-primary">Создать</button>
-          </div>
-        </div>
-      </div>
-</div>
 
 
     <table class="table table-bordered">
