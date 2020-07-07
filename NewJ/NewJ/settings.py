@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'a*-7rw^6sln1l-s6c7km(b#es+7)wj==04po_q&ayq2_ha2&=h'
+SECRET_KEY = 'h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -151,8 +151,8 @@ ACCOUNT_FORMS = {
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'denis.batia004@gmail.com'
-EMAIL_HOST_PASSWORD = '^Osadki5682081'
+EMAIL_HOST_USER = 'd.com'
+EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = 'denis.batia004@gmail.com'
 DEFAULT_TO_EMAIL = 'to email'
 
