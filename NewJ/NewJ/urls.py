@@ -15,10 +15,14 @@ urlpatterns = [
     # path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', views.Register.as_view(), name='register'),
     path('accounts/login/', views.Login.as_view(), name='login'),
+    path('confirm_register/<str:uuid>/', views.Confirm_Registration.as_view(), name='confirm_registration'),
+    path('logout/', views.LogOut.as_view(), name='logout'),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
     path('', views.App_Index.as_view(), name='index'),
     # path('login/', views.Login.as_view(), name='login'),
 
-    path('confirm_register/<str:uuid>/', views.Confirm_Registration.as_view(), name='confirm_registration'),
-    path('logout/', views.LogOut.as_view(), name='logout'),
+
     path('api/', include('app.urls')),
 ]
+

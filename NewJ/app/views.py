@@ -99,7 +99,7 @@ class Register(CreateView):
             'Subject here',
             link,
             'denis.batia004@gmail.com',
-            ['denis.batia004@yandex.ru'],
+            [self.object.email],
             fail_silently=False,
         )
         return HttpResponseRedirect(self.get_success_url())
@@ -121,6 +121,9 @@ class Confirm_Registration(DetailView):
         try:
             # Get the single item from the filtered queryset
             obj = queryset.get()
+            if not obj.is_active:
+                obj.is_active = True
+                obj.save()
         except queryset.model.DoesNotExist:
             raise Http404(_("No %(verbose_name)s found matching the query") %
                           {'verbose_name': queryset.model._meta.verbose_name})
@@ -193,8 +196,7 @@ class MyGetToken(FormView):
     def get(self, request, *args, **kwargs):
         if request.user.id:
             return self.render_to_response(self.get_context_data())
-        else:
-            return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -218,9 +220,10 @@ class OncePerDayUserThrottle(UserRateThrottle):
 class NewsViewSet(viewsets.ModelViewSet):
 
     throttle_classes = (OncePerDayUserThrottle,)
-    # renderer_classes = (renderers.JSONRenderer,)
+    renderer_classes = (renderers.JSONRenderer,)
     queryset = News.objects.all()
     serializer_class = NewsSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
+
 
 
