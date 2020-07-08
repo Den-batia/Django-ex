@@ -11,7 +11,7 @@ from django.views.generic import View
 from django.http import Http404, HttpResponseRedirect
 from django.core.mail import send_mail
 from rest_framework import viewsets, permissions, renderers
-from .serializers import UserSerializer, NewsSerializer
+from .serializers import MyUserSerializer, NewsSerializer
 from rest_framework.decorators import api_view, throttle_classes
 from rest_framework.throttling import UserRateThrottle
 from rest_framework.response import Response
@@ -210,7 +210,7 @@ class MyGetToken(FormView):
 class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+    serializer_class = MyUserSerializer
 
 
 class OncePerDayUserThrottle(UserRateThrottle):

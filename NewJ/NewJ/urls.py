@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from app import views
+from app.yasg import urlpatterns as sd_url
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -25,4 +26,5 @@ urlpatterns = [
 
     path('api/', include('app.urls')),
 ]
+urlpatterns += sd_url
 

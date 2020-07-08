@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from .views import *
+from .yasg import urlpatterns as yasg_url
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
