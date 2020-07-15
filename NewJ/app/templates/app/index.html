@@ -3,7 +3,7 @@
 {% load tags %}
 {% block content %}
 {% if request.user.is_authenticated %}
-    <a class="btn btn-primary" href="{% url 'logout' %}">Выйти</a>
+    <a class="btn btn-primary" href="{% url 'logoutt' %}">Выйти</a>
     <a class="btn btn-primary" href="{% url 'get_token' %}">API</a>
     {{request.user}}
     {% else %}

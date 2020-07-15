@@ -6,6 +6,7 @@ from . import tasks
 from django.http import HttpResponse, HttpRequest
 from django.views.generic import CreateView, FormView, UpdateView, DetailView
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.sessions.models import Session
 from django.urls import reverse_lazy
 from django.views.generic import View
 from django.http import Http404, HttpResponseRedirect
@@ -55,6 +56,11 @@ class App_Index(CreateView):
         obj = self.model.objects.all()
         # a = tasks.asd.delay(10)
         # kwargs['obj'] = obj
+        # if not self.request.session.exists(self.request.session.session_key):
+        #     self.request.session.create()
+        # self.request.session['s'] = 's'
+        # s = Session.objects.get(pk = self.request.session.session_key)
+        # print(s.get_decoded())
 
         return super().get_context_data(**kwargs)
 
