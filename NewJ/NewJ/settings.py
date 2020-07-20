@@ -40,11 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'app',
+    'drf_yasg',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'captcha',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -156,8 +159,8 @@ EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = ''
 DEFAULT_TO_EMAIL = 'to email'
 
-RECAPTCHA_PUBLIC_KEY = ''
-RECAPTCHA_PRIVATE_KEY = ''
+RECAPTCHA_PUBLIC_KEY = '6Lcm0LEZAAAAANyo2zpB-hBmhoMzrCHr_iuTDMTK'
+RECAPTCHA_PRIVATE_KEY = '6Lcm0LEZAAAAAOnAQKHEVO-5_WKjg-V6vhkR10WD'
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout':3600}
@@ -167,7 +170,7 @@ CELERY_ACCEPT_CONTENT = ['application/json']  # Ignore other content
 CELERY_RESULT_SERIALIZER ='json'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication', 'rest_framework_simplejwt.authentication.JWTAuthentication',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
