@@ -17,7 +17,7 @@ django-ranged-response==0.2.0
 django-recaptcha==2.0.6
 django-simple-captcha==0.5.12
 django-templated-mail==1.1.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-simplejwt==4.4.0
 djoser==2.0.3
 drf-yasg==1.17.1
