@@ -25,7 +25,7 @@ get==2019.4.13
 idna==2.9
 inflection==0.5.0
 itypes==1.2.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 kombu==4.6.8
 MarkupSafe==1.1.1
 multidict==4.7.6
