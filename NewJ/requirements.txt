@@ -32,7 +32,7 @@ multidict==4.7.6
 numpy==1.19.0
 oauthlib==3.1.0
 packaging==20.4
-Pillow==7.1.2
+Pillow==9.0.0
 post==2019.4.13
 public==2019.4.13
 PyJWT==1.7.1
